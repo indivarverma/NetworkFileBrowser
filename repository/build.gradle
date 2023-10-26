@@ -1,0 +1,59 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+def okhttp_version = '4.11.0'
+def retrofit_version = "2.9.0"
+def rxjava3_retrofitadapter_version = "2.9.0"
+def joda_date_time_version = "2.9.4"
+android {
+    namespace 'com.indivar.filebrowser.network'
+    compileSdk 34
+
+    defaultConfig {
+        minSdk 24
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation deps.android_core_core_ktx
+    implementation deps.org_jetbraings_kotlin_kotlin_bom
+    implementation deps.androidx_appcompat_appcompat
+    implementation deps.android_material
+    implementation project(path: ':common-core')
+    implementation project(path: ':models')
+
+    testImplementation deps.junit
+    androidTestImplementation deps.androidx_test_ext_junit
+    androidTestImplementation deps.androidx_test_espresso_espresso_core
+    implementation deps.com_squareup_okhttp3_okhttp
+    api deps.com_squareup_retrofit2_retrofit
+    implementation deps.com_squareup_retrofit2_adapter_rxjava3
+    implementation deps.joda_time
+    api deps.com_squareup_moshi_moshi_kotlin
+    api deps.com_squareup_moshi_moshi_adapters
+    api deps.com_squareup_retrofit2_converter_moshi
+    debugImplementation deps.com_facebook_flipper_flipper
+    debugImplementation deps.com_facebook_soloader_soloader
+    releaseImplementation deps.com_facebook_flipper_flipper_noop
+    debugImplementation deps.com_facebook_flipper_flipper_network_plugin
+    implementation deps.com_google_code_gson_gson
+}
